@@ -39,6 +39,16 @@ bool isFileOlderThanNMonths(const string& filename, int N) {
     return diffMonths > N;
 }
 
+// Function to delete a file
+bool deleteFile(const string& filename, const string& reason) {
+    if (remove(filename.c_str()) != 0) {
+        cerr << "Error deleting file: " << filename << " (" << reason << ")" << endl;
+        return false;
+    }
+    cout << "Deleted file: " << filename << " (" << reason << ")" << endl;
+    return true;
+}
+
 void cleanFolder(const string& folderPath, const vector<string>& filenames, const vector<int>& numbers) {
     int N, m;
     cout << "Enter value of minimum months" << endl;
@@ -101,4 +111,28 @@ void cleanFolder(const string& folderPath, const vector<string>& filenames, cons
     }
 }
 
+int main() {
+    ifstream inputFile("hello[1].txt");
+    string folderName, filename;
+    int number;
+    vector<string> filenames;
+    vector<int> numbers;
+    vector<string> dates;
+    string date;
 
+    while (inputFile >> folderName) {
+        filenames.clear();
+        numbers.clear();
+        while (inputFile >> filename >> number >> date) {
+            if (filename == "-" ) {
+                break;
+            }
+            filenames.push_back(filename);
+            numbers.push_back(number);
+            dates.push_back(date);
+        }
+        cleanFolder(folderName, filenames, numbers);
+    }
+
+    return 0;
+}
