@@ -38,3 +38,34 @@ bool isFileOlderThanNMonths(const string& filename, int N) {
 
     return diffMonths > N;
 }
+
+void cleanFolder(const string& folderPath, const vector<string>& filenames, const vector<int>& numbers) {
+    int N, m;
+    cout << "Enter value of minimum months" << endl;
+    cin >> N;
+    cout << "Enter value for minimum no. of access" << endl;
+    cin >> m;
+
+    vector<string> filePaths;
+    for (size_t i = 0; i < filenames.size(); ++i) {
+        string filePath = folderPath + "/" + filenames[i];
+        if (!fileExists(filePath)) {
+            cerr << "File does not exist: " << filePath << endl;
+            continue;
+        }
+        filePaths.push_back(filePath);
+    }
+
+    map<string, string> contentMap;
+    vector<string> duplicateFiles;
+
+    for (size_t i = 0; i < filePaths.size(); ++i) {
+        const string& filePath = filePaths[i];
+        const int& accessFreq = numbers[i];
+
+        if (isFileEmpty(filePath)) {
+            if (!deleteFile(filePath, "empty file")) {
+                cerr << "Failed to delete empty file: " << filePath << endl;
+            }
+            continue;
+        }
