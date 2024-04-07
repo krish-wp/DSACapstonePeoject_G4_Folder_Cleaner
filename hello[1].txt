@@ -1,0 +1,1 @@
+C:\Users\Krish\OneDrive\Desktop\C++\dsaKaExample capital.txt 10 12-5-2023 capitalcopy.txt 10 13-2-1009 empty.txt 6 13-2-1009 Tricky.txt 3 13-2-1009 withdot.txt 4 13-2-1009 withdot.txt 4 13-2-1009 -
