@@ -69,3 +69,36 @@ void cleanFolder(const string& folderPath, const vector<string>& filenames, cons
             }
             continue;
         }
+ if (isFileOlderThanNMonths(filePath, N)) {
+            if (!deleteFile(filePath, "older than " + to_string(N) + " months")) {
+                cerr << "Failed to delete file older than " << N << " months: " << filePath << endl;
+            }
+            continue;
+        }
+
+        if (accessFreq < m) {
+            if (!deleteFile(filePath, "Access count of the file is less than " + to_string(m))) {
+                cerr << "Failed to delete file: " << filePath << endl;
+            }
+            continue;
+        }
+
+        ifstream file(filePath);
+        stringstream buffer;
+        buffer << file.rdbuf();
+        string fileContent = buffer.str();
+  if (contentMap.find(fileContent) == contentMap.end()) {
+            contentMap[fileContent] = filePath;
+        } else {
+            duplicateFiles.push_back(filePath);
+        }
+    }
+
+    for (const string& duplicateFile : duplicateFiles) {
+        if (!deleteFile(duplicateFile, "duplicate file")) {
+            cerr << "Failed to delete duplicate file: " << duplicateFile << endl;
+        }
+    }
+}
+
+
