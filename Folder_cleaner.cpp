@@ -27,7 +27,7 @@ bool isFileEmpty(const string& filename) {
 bool isFileOlderThanNMonths(const string& filename, int N) {
     struct stat fileStat;
     if (stat(filename.c_str(), &fileStat) != 0) {
-        cerr << "Error getting file status for: " << filename << endl;
+        cerr << "Error getting file status for: " << filename << endl << endl;
         return false;
     }
 
@@ -42,25 +42,25 @@ bool isFileOlderThanNMonths(const string& filename, int N) {
 // Function to delete a file
 bool deleteFile(const string& filename, const string& reason) {
     if (remove(filename.c_str()) != 0) {
-        cerr << "Error deleting file: " << filename << " (" << reason << ")" << endl;
+        cerr << "Error deleting file: " << filename << " (" << reason << ")" << endl << endl;
         return false;
     }
-    cout << "Deleted file: " << filename << " (" << reason << ")" << endl;
+    cout << "Deleted file: " << filename << " (" << reason << ")" << endl << endl;
     return true;
 }
 
 void cleanFolder(const string& folderPath, const vector<string>& filenames, const vector<int>& numbers) {
     int N, m;
-    cout << "Enter value of minimum months" << endl;
+    cout << "Enter value of minimum months" << endl << endl;
     cin >> N;
-    cout << "Enter value for minimum no. of access" << endl;
+    cout << "Enter value for minimum no. of access" << endl << endl;
     cin >> m;
 
     vector<string> filePaths;
     for (size_t i = 0; i < filenames.size(); ++i) {
         string filePath = folderPath + "/" + filenames[i];
         if (!fileExists(filePath)) {
-            cerr << "File does not exist: " << filePath << endl;
+            cerr << "File does not exist: " << filePath << endl << endl;
             continue;
         }
         filePaths.push_back(filePath);
@@ -75,7 +75,7 @@ void cleanFolder(const string& folderPath, const vector<string>& filenames, cons
 
         if (isFileEmpty(filePath)) {
             if (!deleteFile(filePath, "empty file")) {
-                cerr << "Failed to delete empty file: " << filePath << endl;
+                cerr << "Failed to delete empty file: " << filePath << endl << endl;
             }
             continue;
         }
@@ -88,7 +88,7 @@ void cleanFolder(const string& folderPath, const vector<string>& filenames, cons
 
         if (accessFreq < m) {
             if (!deleteFile(filePath, "Access count of the file is less than " + to_string(m))) {
-                cerr << "Failed to delete file: " << filePath << endl;
+                cerr << "Failed to delete file: " << filePath << endl << endl;
             }
             continue;
         }
@@ -106,7 +106,7 @@ void cleanFolder(const string& folderPath, const vector<string>& filenames, cons
 
     for (const string& duplicateFile : duplicateFiles) {
         if (!deleteFile(duplicateFile, "duplicate file")) {
-            cerr << "Failed to delete duplicate file: " << duplicateFile << endl;
+            cerr << "Failed to delete duplicate file: " << duplicateFile << endl << endl;
         }
     }
 }
