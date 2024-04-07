@@ -1,6 +1,6 @@
 C:\Users\Krish\OneDrive\Desktop\C++\dsaKaExample 
-capital.txt 10 12-5-2023 
-capitalcopy.txt 10 13-2-1009 
-empty.txt 6 13-2-1009 
-Tricky.txt 3 13-2-1009 
-withdot.txt 4 13-2-1009
+capital.txt 10 2-5-2024 
+capitalcopy.txt 10 2-6-2024 
+empty.txt 6 3-4-2024
+Tricky.txt 3 3-5-2024 
+withdot.txt 4 2-6-2024
